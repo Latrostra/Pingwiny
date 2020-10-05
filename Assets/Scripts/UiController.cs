@@ -9,11 +9,11 @@ public class UiController : MonoBehaviour
     public Action OnBuildArea;
     public Action OnCancelAction;
     [SerializeField]
-    private Button buildButton;
+    public Button buildButton;
     [SerializeField]
-    private Button cancelButton;
+    public Button cancelButton;
     [SerializeField]
-    private GameObject cancelButtonPanel; 
+    public GameObject cancelButtonPanel; 
     // Start is called before the first frame update
     void Start()
     {

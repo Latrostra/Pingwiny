@@ -16,8 +16,6 @@ public class InputManager : MonoBehaviour
     private Camera camera;
     [SerializeField]
     private LayerMask mouseInputMask;
-    [SerializeField]
-    private int cellSize = 3;
     
 
     public void Update() {
@@ -26,13 +24,16 @@ public class InputManager : MonoBehaviour
     }
 
     private void GetPointerPosition() {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
-            var ray = camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, mouseInputMask)) {
-                Vector3 position = hit.point - transform.position;
-                OnPointerDown?.Invoke(position);
-            }
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            CallActionOnPointer(OnPointerDown);
+        }
+        if (Input.GetMouseButton(0)) {
+            CallActionOnPointer(OnPointerChange);
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            OnPointerUp?.Invoke();
         }
     }
 
@@ -45,4 +46,27 @@ public class InputManager : MonoBehaviour
             OnPointerSecondUp?.Invoke();
         }
     }
+
+    private void CallActionOnPointer(Action<Vector3> action) {
+        Vector3? position = GetMousePosition();
+            if (position.HasValue)
+            {
+                action?.Invoke(position.Value);
+                position = null;
+            }
+    }
+    private Vector3? GetMousePosition()
+    {
+        var ray = camera.ScreenPointToRay(Input.mousePosition);
+        Vector3? position = null;
+        RaycastHit hit;
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, mouseInputMask))
+        {
+            position = hit.point - transform.position;
+        }
+
+        return position;
+    }
+
+    
 }
