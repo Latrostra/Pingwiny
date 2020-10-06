@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
         playerSelectionState = new PlayerSelectionState(this, cameraMovement);
         playerBuildingSelectionState = new PlayerBuildingSelectionState(this, placementManager, grid);
         state = playerSelectionState;
-
+    }
+    void Start()
+    {
+        cameraMovement.SetCameraBounds(width, 0, length, 0);
 #region InputManagerCache
         inputManager.OnPointerDown += OnPointerDownHandler;
         inputManager.OnPointerUp += OnPointerUpHandler;
@@ -38,10 +41,6 @@ public class GameManager : MonoBehaviour
         uiController.OnBuildArea += OnBuildingModeHandler;
         uiController.OnCancelAction += OnCancelModeHandler;
 
-    }
-    void Start()
-    {
-        cameraMovement.SetCameraBounds(width, 0, length, 0);
     }
 
     // Update is called once per frame
