@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public CameraMovement cameraMovement;
     public int width, length;
     private GridStructure grid;
+    private BuildingManager buildingManager;
     [SerializeField]
     private int cellSize = 3;
 
@@ -23,9 +24,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake() {
         grid = new GridStructure(cellSize, width, length);
+        buildingManager = new BuildingManager(placementManager, cellSize, width, length);
 
         playerSelectionState = new PlayerSelectionState(this, cameraMovement);
-        playerBuildingSelectionState = new PlayerBuildingSelectionState(this, placementManager, grid);
+        playerBuildingSelectionState = new PlayerBuildingSelectionState(this, buildingManager, grid);
         state = playerSelectionState;
     }
     void Start()

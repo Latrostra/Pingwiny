@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerBuildingSelectionState : PlayerState
 {
-    private PlacementManager placementManager;
+    private BuildingManager buildingManager;
     private GridStructure grid;
-    public PlayerBuildingSelectionState(GameManager gameManager, PlacementManager placementManager, GridStructure grid) : base(gameManager) {
-        this.placementManager = placementManager;
+    public PlayerBuildingSelectionState(GameManager gameManager, BuildingManager buildingManager, GridStructure grid) : base(gameManager) {
+        this.buildingManager = buildingManager;
         this.grid = grid;
     }
     public override void OnInputPanChange(Vector3 position) {
@@ -23,10 +23,7 @@ public class PlayerBuildingSelectionState : PlayerState
     }
 
     public override void OnInputPointerDown(Vector3 position) {
-        Vector3 gridPosition = grid.CalculateGridPosition(position);
-        if (grid.IsCellTaken(gridPosition) == false) {
-            placementManager.CreateBuildings(gridPosition, grid);
-        }
+        buildingManager.BuildStructureAt(position);
     }
 
     public override void OnInputPointerUp() {
