@@ -28,6 +28,10 @@ public class PlacementManager : MonoBehaviour
 
     public void RemoveBuildings(Vector3 gridPosition, GridStructure grid)
     {
-        grid.RemoveStructureOnTheGrid(gridPosition);
+        var structure = grid.GetStructureFromGrid(gridPosition);
+        if (structure != null) {
+            grid.RemoveStructureFromTheGrid(gridPosition);
+            Destroy(structure);
+        }
     }
 }

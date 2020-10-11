@@ -17,6 +17,10 @@ public class Cell
         this.isTaken = true;
     }
 
+    public GameObject GetStructure() {
+        return structureModel;
+    }
+
     public void RemoveConstruction()
     {
         this.structureModel = null;

@@ -24,10 +24,12 @@ namespace Test
             GameObject buttonBuildObject = new GameObject();
             GameObject buttonCancelObject = new GameObject();
             GameObject cancelPanel = new GameObject();
+            GameObject demolishButton = new GameObject();
             uiController.cancelButton = buttonCancelObject.AddComponent<Button>();
             var buttonBuildComponent = buttonBuildObject.AddComponent<Button>();
             uiController.buildButton = buttonBuildComponent;
             uiController.cancelButtonPanel = buttonCancelObject;
+            uiController.destroyButton = demolishButton.AddComponent<Button>();
             gameManager = gameManagerObject.AddComponent<GameManager>();
             gameManager.inputManager = inputManagerComponent;
             gameManager.cameraMovement = cameraMovement;
@@ -42,6 +44,16 @@ namespace Test
             uiController.buildButton.onClick.Invoke();
             yield return new WaitForEndOfFrame();
             Assert.IsTrue(gameManager.State is PlayerBuildingSelectionState);
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerDestroyStateWithEnumeratorPasses()
+        {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            uiController.destroyButton.onClick.Invoke();
+            yield return new WaitForEndOfFrame();
+            Assert.IsTrue(gameManager.State is PlayerDemolishState);
         }
 
         [UnityTest]

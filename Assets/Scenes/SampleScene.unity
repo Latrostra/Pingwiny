@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildButton: {fileID: 363077624}
   cancelButton: {fileID: 1191294874}
+  destroyButton: {fileID: 880729343}
   cancelButtonPanel: {fileID: 1505737085}
 --- !u!4 &151681713
 Transform:
@@ -983,10 +984,10 @@ MonoBehaviour:
   inputManager: {fileID: 1576018712}
   placementManager: {fileID: 1489490543}
   uiController: {fileID: 151681712}
-  cellSize: 3
   cameraMovement: {fileID: 1600297540}
   width: 100
   length: 100
+  cellSize: 3
 --- !u!4 &776969032
 Transform:
   m_ObjectHideFlags: 0
@@ -1907,7 +1908,6 @@ MonoBehaviour:
   mouseInputMask:
     serializedVersion: 2
     m_Bits: 256
-  cellSize: 3
 --- !u!4 &1576018713
 Transform:
   m_ObjectHideFlags: 0

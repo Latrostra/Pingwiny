@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerSelectionState playerSelectionState;
     public PlayerBuildingSelectionState playerBuildingSelectionState;
+    public PlayerDemolishState playerDemolishState;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
         playerSelectionState = new PlayerSelectionState(this, cameraMovement);
         playerBuildingSelectionState = new PlayerBuildingSelectionState(this, buildingManager, grid);
+        playerDemolishState = new PlayerDemolishState(this, buildingManager, grid);
         state = playerSelectionState;
     }
     void Start()
@@ -42,7 +44,7 @@ public class GameManager : MonoBehaviour
 #endregion
         uiController.OnBuildArea += OnBuildingModeHandler;
         uiController.OnCancelAction += OnCancelModeHandler;
-
+        uiController.OnDestroy += OnDestroyModeHandler;
     }
 
     // Update is called once per frame
@@ -73,6 +75,10 @@ public class GameManager : MonoBehaviour
 
     private void OnBuildingModeHandler() {
         TransistionToState(playerBuildingSelectionState);
+    }
+
+    private void OnDestroyModeHandler() {
+        TransistionToState(playerDemolishState);
     }
 
     private void OnCancelModeHandler() {

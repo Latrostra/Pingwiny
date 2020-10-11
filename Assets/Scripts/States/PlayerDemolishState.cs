@@ -6,7 +6,7 @@ public class PlayerDemolishState : PlayerState
 {
     public BuildingManager buildingManager;
     public GridStructure grid;
-    public PlayerDemolishState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
+    public PlayerDemolishState(GameManager gameManager, BuildingManager buildingManager, GridStructure grid) : base(gameManager)
     {
         this.buildingManager = buildingManager;
         this.grid = grid;
@@ -18,17 +18,17 @@ public class PlayerDemolishState : PlayerState
 
     public override void OnInputPanChange(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public override void OnInputPanUp()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public override void OnInputPointerChange(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public override void OnInputPointerDown(Vector3 position)
@@ -38,6 +38,6 @@ public class PlayerDemolishState : PlayerState
 
     public override void OnInputPointerUp()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 }

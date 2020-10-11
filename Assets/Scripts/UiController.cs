@@ -7,11 +7,14 @@ using UnityEngine.UI;
 public class UiController : MonoBehaviour
 {
     public Action OnBuildArea;
+    public Action OnDestroy;
     public Action OnCancelAction;
     [SerializeField]
     public Button buildButton;
     [SerializeField]
     public Button cancelButton;
+    [SerializeField]
+    public Button destroyButton;
     [SerializeField]
     public GameObject cancelButtonPanel; 
     // Start is called before the first frame update
@@ -19,13 +22,8 @@ public class UiController : MonoBehaviour
     {
         cancelButtonPanel.SetActive(false);
         buildButton.onClick.AddListener(OnBuildAreaCallBack);
+        destroyButton.onClick.AddListener(OnDestroyButtonCallBack);
         cancelButton.onClick.AddListener(OnCancelButtonCallBack);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnBuildAreaCallBack() {
@@ -36,5 +34,10 @@ public class UiController : MonoBehaviour
     private void OnCancelButtonCallBack() {
         cancelButtonPanel.SetActive(false);
         OnCancelAction?.Invoke();
+    }
+
+    private void OnDestroyButtonCallBack() {
+        cancelButtonPanel.SetActive(true);
+        OnDestroy?.Invoke();
     }
 }
